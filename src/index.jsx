@@ -8,7 +8,7 @@ import NoteInput from './components/NoteInput';
 import './styles/style.css';
 import NoteApp from './components/NoteApp';
 
-console.log(showFormattedDate);
+console.log(new Date().toISOString())
 
 const root = createRoot(document.getElementById('root'));
 root.render(<NoteApp />);

@@ -1,12 +1,15 @@
 import React from "react";
 
-function NoteItem ({ title, body, createdAt, archived }) {
+function NoteItem ({ id, title, body, createdAt, archived, onDelete }) {
     return (
         <div className="note-item">
-            <h2 className="note-item__title">Something</h2>
-            <p className="note-item__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eum delectus tempore adipisci ratione, eligendi nam molestias provident dolores numquam.</p>
+            <h3 className="note-item__title">{title}</h3>
             <p className="note-item__date">{createdAt}</p>
-            <p className="note-item__archived">{archived}</p>
+            <p className="note-item__body">{body}</p>
+            <div className="note-item__action">
+                <button className="note-item__delete-button" onClick={() => onDelete(id)}>Delete</button>
+                <button className="note-item__archive-button" onClick={() => onArchive()} >Archive</button>
+            </div>
         </div>
     );
 }
