@@ -4,18 +4,22 @@ class NoteSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state ={
-        searchTitle: "",
-    }
-    this.onSearchHandler = this.onSearchHandler.bind(this)
+    this.state = {
+      searchTitle: "",
+    };
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
   onSearchHandler(event) {
-    this.setState({
-        searchTitle: event.target.value
-    })
-    event.preventDefault()
-    this.props.onSearch(this.state)
+    const searchTitle = event.target.value;
+    this.setState(
+      {
+        searchTitle: searchTitle,
+      },
+      () => {
+        this.props.onSearch(this.state.searchTitle);
+      }
+    );
   }
 
   render() {
@@ -24,7 +28,7 @@ class NoteSearch extends React.Component {
         <input
           type="text"
           placeholder="Cari Judul Catatan..."
-          value = {this.state.searchTitle}
+          value={this.state.searchTitle}
           onChange={this.onSearchHandler}
         />
       </div>

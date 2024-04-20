@@ -3,7 +3,9 @@ import React from "react";
 function NoteItemAction({ id, onDelete, archieved, onArchive, moveArchive }) {
   return (
     <div className="note-item__action">
-      <button className="note-item__delete-button" onClick={() => onDelete(id)}>
+      <button 
+      className="note-item__delete-button" 
+      onClick={() => onDelete(id)}>
         Delete
       </button>
 
