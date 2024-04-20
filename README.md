@@ -2,7 +2,7 @@
 
 Untuk memenuhi Proyek Akhir: Membangun Aplikasi Catatan Menggunakan React dari dicoding
 
-project ini telah di deploy di : `https://gelaws-notes.web.app/`
+project ini telah di deploy di : [https://gelaws-notes.web.app](https://gelaws-notes.web.app/)
 
 
 
