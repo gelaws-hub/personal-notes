@@ -3,7 +3,6 @@ import NoteInput from "./NoteInput";
 import NoteList from "./NoteList";
 import { getInitialData, showFormattedDate } from "../utils";
 import NoteAppHeader from "./NoteAppHeader";
-import NoteSearch from "./NoteSearch";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -77,32 +76,43 @@ class NoteApp extends React.Component {
   };
 
   render() {
-    console.log(this.state.searchTitle);
     const { searchTitle, notes } = this.state;
     const searchedNotes = searchTitle
       ? notes.filter((note) => note.title.toLowerCase().includes(searchTitle))
       : notes;
 
+    console.log(notes)
+    const hasArchived = notes.some((note) => note.archived);
+
     return (
       <>
-      <NoteAppHeader onSearch={this.onSearchHandler} />
+        <NoteAppHeader onSearch={this.onSearchHandler} />
         <div className="note-app__body">
           <NoteInput addNote={this.onAddNoteHandler} />
 
           {/* Active Items */}
-          <NoteList
-            notes={searchedNotes.filter((note) => !note.archived)}
-            onDelete={this.onDeleteNoteHandler}
-            onArchive={this.onArchiveNoteHandler}
-          />
+          <h2 className="note-app__body">Active Notes</h2>
+          {notes.length !== 0 ? (
+            <NoteList
+              notes={searchedNotes.filter((note) => !note.archived)}
+              onDelete={this.onDeleteNoteHandler}
+              onArchive={this.onArchiveNoteHandler}
+            />
+          ) : (
+            <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
+          )}
 
           {/* Archive Items */}
           <h2 className="note-app__body">Archive</h2>
-          <NoteList
-            notes={searchedNotes.filter((note) => note.archived)}
-            onDelete={this.onDeleteNoteHandler}
-            moveArchive={this.moveArchiveNoteHandler}
-          />
+          {hasArchived ? (
+            <NoteList
+              notes={searchedNotes.filter((note) => note.archived)}
+              onDelete={this.onDeleteNoteHandler}
+              moveArchive={this.moveArchiveNoteHandler}
+            />
+          ) : (
+            <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
+          )}
         </div>
       </>
     );
