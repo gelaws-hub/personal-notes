@@ -3,6 +3,7 @@ import NoteInput from "./NoteInput";
 import NoteList from "./NoteList";
 import { getInitialData, showFormattedDate } from "../utils";
 import NoteAppHeader from "./NoteAppHeader";
+import NoteAppFooter from "./NoteAppFooter";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -81,7 +82,6 @@ class NoteApp extends React.Component {
       ? notes.filter((note) => note.title.toLowerCase().includes(searchTitle))
       : notes;
 
-    console.log(notes)
     const hasArchived = notes.some((note) => note.archived);
 
     return (
@@ -114,6 +114,7 @@ class NoteApp extends React.Component {
             <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
           )}
         </div>
+        <NoteAppFooter />
       </>
     );
   }

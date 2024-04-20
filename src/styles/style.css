@@ -216,3 +216,33 @@ input::placeholder, textarea::placeholder {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.note-app__footer {
+  background-color: #1a1a1d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.note-app__footer h3 {
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.note-app__footer p {
+  margin-bottom: 8px;
+}
+
+.note-app__footer a {
+  text-decoration: none;
+  color: #888888;
+  cursor: pointer;
+}
+
+.note-app__footer a:hover {
+  color: #ffffff;
+}
+
