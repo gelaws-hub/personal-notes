@@ -3,6 +3,7 @@ import NoteInput from "./NoteInput";
 import NoteList from "./NoteList";
 import { getInitialData, showFormattedDate } from "../utils";
 import NoteAppHeader from "./NoteAppHeader";
+import NoteSearch from "./NoteSearch";
 
 class NoteApp extends React.Component {
   constructor(props){
@@ -12,11 +13,13 @@ class NoteApp extends React.Component {
       notes: getInitialData().map(note => {
         return {...note, createdAt: showFormattedDate(new Date(note.createdAt))}
       }),
+      searchTitle: ""
     }
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this)
     this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this)
     this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this)
     this.moveArchiveNoteHandler = this.moveArchiveNoteHandler.bind(this)
+    this.onSearchHandler = this.onSearchHandler.bind(this)
   }
 
   onAddNoteHandler = ({title, body}) => {
@@ -65,21 +68,34 @@ class NoteApp extends React.Component {
     })
   }
 
+  onSearchHandler = (event) => {
+    const searchTitle = event.searchTitle.trim().toLowerCase()
+    this.setState({searchTitle})
+    console.log
+  }
+
   render() {
+    const { searchTitle, notes } = this.state;
+    const searchedNotes = searchTitle
+      ? notes.filter(note => note.title.toLowerCase().includes(searchTitle))
+      : notes
+
    return (
     <div className="note-app__body">
-      <NoteAppHeader />
-      <h2 className="note-app__body">Buat Catatan</h2>
+      <NoteAppHeader onSearch={this.onSearchHandler}/>
       <NoteInput addNote={this.onAddNoteHandler}/>
+
+      {/* Active Items */}
       <NoteList 
-      notes={this.state.notes.filter(note => !note.archived)} 
+      notes={searchedNotes.filter(note => !note.archived)} 
       onDelete={this.onDeleteNoteHandler}
       onArchive={this.onArchiveNoteHandler}
       />
       
+      {/* Archive Items */}
       <h2 className="note-app__body">Archive</h2>
       <NoteList 
-      notes={this.state.notes.filter(note => note.archived)} 
+      notes={searchedNotes.filter(note => note.archived)} 
       onDelete={this.onDeleteNoteHandler}
       moveArchive={this.moveArchiveNoteHandler}
       />
@@ -88,5 +104,6 @@ class NoteApp extends React.Component {
   }
   
 }
+
 
 export default NoteApp;

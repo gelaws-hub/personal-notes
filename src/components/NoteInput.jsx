@@ -49,6 +49,7 @@ class NoteInput extends React.Component {
 
     return (
       <form className="note-input">
+        <h2>Buat Catatan</h2>
         <p className="note-input__title__char-limit">
           Karakter tersisa : {isTitleValid ? titleLengthRemaining : 0}
         </p>
