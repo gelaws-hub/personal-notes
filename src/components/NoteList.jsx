@@ -8,7 +8,7 @@ function NoteList({notes, onDelete}) {
     return (
         <div className="notes-list">
             {notes.map((note) => (
-                <NoteItem {...notes}
+                <NoteItem {...note}
                 key={note.id} 
                 onDelete={onDelete}
                 id={note.id} />
