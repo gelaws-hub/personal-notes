@@ -26,7 +26,7 @@ function NoteItem({
         </button>
         <button
           className="note-item__archive-button"
-          onClick={() => onArchive(archived)}
+          onClick={() => onArchive(id)}
         >
           Archive
         </button>
