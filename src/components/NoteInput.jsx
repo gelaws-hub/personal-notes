@@ -7,42 +7,46 @@ class NoteInput extends React.Component {
     this.state = {
       title: "",
       body: "",
-    }
-    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this)
-    this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this)
-    this.onSubmitHandler = this.onSubmitHandler.bind(this)
+    };
+
+    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
+    this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
-  onTitleChangeHandler(event){
+  onTitleChangeHandler(event) {
     const title = event.target.value;
     const isTitleValid = title.length <= 50;
 
     this.setState({
       title: isTitleValid ? title : this.state.title,
-    })
+    });
   }
 
-  onBodyChangeHandler(event){
+  onBodyChangeHandler(event) {
     this.setState({
       body: event.target.value,
-    })
+    });
   }
 
-  onSubmitHandler(event){
-    event.preventDefault()
-    this.props.addNote(this.state)
+  onSubmitHandler(event) {
+    event.preventDefault();
+
+    this.state.title.trim() !== "" && this.state.body.trim() !== ""
+      ? this.props.addNote(this.state)
+      : alert("Tidak boleh ada field yang kosong!");
 
     //reset form input
     this.setState(() => {
       return {
         title: "",
         body: "",
-      }
-    })
+      };
+    });
   }
 
   render() {
-    const {title} = this.state;
+    const { title } = this.state;
     const titleLength = title.length;
     const isTitleValid = titleLength <= 50;
     const titleLengthRemaining = 50 - titleLength;
@@ -54,7 +58,7 @@ class NoteInput extends React.Component {
           Karakter tersisa : {isTitleValid ? titleLengthRemaining : 0}
         </p>
         <input //title field
-          className={`note-input__title ${!isTitleValid && 'invalid'}`}
+          className={`note-input__title ${!isTitleValid && "invalid"}`}
           id="title"
           placeholder="Masukkan Judul Catatan..."
           value={this.state.title}
@@ -68,7 +72,12 @@ class NoteInput extends React.Component {
           value={this.state.body}
           onChange={this.onBodyChangeHandler}
         />
-        <button className="note-input__submit-button" onClick={this.onSubmitHandler} >Tambah</button>
+        <button
+          className="note-input__submit-button"
+          onClick={this.onSubmitHandler}
+        >
+          Tambah
+        </button>
       </form>
     );
   }
