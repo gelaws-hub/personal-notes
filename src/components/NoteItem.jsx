@@ -1,4 +1,5 @@
 import React from "react";
+import NoteItemAction from "./NoteItemAction";
 
 function NoteItem({
   id,
@@ -8,6 +9,7 @@ function NoteItem({
   archived,
   onDelete,
   onArchive,
+  moveArchive,
 }) {
   return (
     <div className="note-item">
@@ -16,21 +18,13 @@ function NoteItem({
         <p className="note-item__date">{createdAt}</p>
         <p className="note-item__body">{body}</p>
       </div>
-
-      <div className="note-item__action">
-        <button
-          className="note-item__delete-button"
-          onClick={() => onDelete(id)}
-        >
-          Delete
-        </button>
-        <button
-          className="note-item__archive-button"
-          onClick={() => onArchive(id)}
-        >
-          Archive
-        </button>
-      </div>
+      <NoteItemAction
+        id={id}
+        onArchive={onArchive}
+        onDelete={onDelete}
+        archieved={archived}
+        moveArchive={moveArchive}
+      />
     </div>
   );
 }

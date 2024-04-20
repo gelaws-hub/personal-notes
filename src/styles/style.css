@@ -108,6 +108,7 @@ input::placeholder, textarea::placeholder {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 250px;
 }
 
 .note-item__content {

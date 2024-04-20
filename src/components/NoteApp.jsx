@@ -16,6 +16,7 @@ class NoteApp extends React.Component {
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this)
     this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this)
     this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this)
+    this.moveArchiveNoteHandler = this.moveArchiveNoteHandler.bind(this)
   }
 
   onAddNoteHandler = ({title, body}) => {
@@ -51,6 +52,19 @@ class NoteApp extends React.Component {
     });
   }
 
+  moveArchiveNoteHandler = (id) => {
+    this.setState(prevState => {
+      const newNotes = prevState.notes.map(note => {
+        if(note.id === id){
+          return {...note, archived: false}
+        }else{
+          return note
+        }
+      })
+      return {notes: newNotes}
+    })
+  }
+
   render() {
    return (
     <div className="note-app__body">
@@ -67,6 +81,7 @@ class NoteApp extends React.Component {
       <NoteList 
       notes={this.state.notes.filter(note => note.archived)} 
       onDelete={this.onDeleteNoteHandler}
+      moveArchive={this.moveArchiveNoteHandler}
       />
     </div>
   ); 
