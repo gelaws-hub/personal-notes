@@ -82,8 +82,6 @@ class NoteApp extends React.Component {
       ? notes.filter((note) => note.title.toLowerCase().includes(searchTitle))
       : notes;
 
-    const hasArchived = notes.some((note) => note.archived);
-
     return (
       <>
         <NoteAppHeader onSearch={this.onSearchHandler} />
@@ -92,29 +90,20 @@ class NoteApp extends React.Component {
 
           {/* Active Items */}
           <h2 className="note-app__body">Active Notes</h2>
-          {notes.length !== 0 ? (
-            <NoteList
-              notes={searchedNotes.filter((note) => !note.archived)}
-              onDelete={this.onDeleteNoteHandler}
-              onArchive={this.onArchiveNoteHandler}
-            />
-          ) : (
-            <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
-          )}
+          <NoteList
+            notes={searchedNotes.filter((note) => !note.archived)}
+            onDelete={this.onDeleteNoteHandler}
+            onArchive={this.onArchiveNoteHandler}
+          />
 
           {/* Archive Items */}
           <h2 className="note-app__body">Archive</h2>
-          {hasArchived ? (
-            <NoteList
-              notes={searchedNotes.filter((note) => note.archived)}
-              onDelete={this.onDeleteNoteHandler}
-              moveArchive={this.moveArchiveNoteHandler}
-            />
-          ) : (
-            <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
-          )}
+          <NoteList
+            notes={searchedNotes.filter((note) => note.archived)}
+            onDelete={this.onDeleteNoteHandler}
+            moveArchive={this.moveArchiveNoteHandler}
+          />
         </div>
-        
         <NoteAppFooter />
       </>
     );
