@@ -114,6 +114,7 @@ class NoteApp extends React.Component {
             <h3 className="notes-list__empty-message">Tidak ada catatan</h3>
           )}
         </div>
+        
         <NoteAppFooter />
       </>
     );
